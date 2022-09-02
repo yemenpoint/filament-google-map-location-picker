@@ -1,0 +1,26 @@
+{
+    "name": "yemenpoint/filament-google-map-location-picker",
+    "description": "Google map location picker for filament",
+    "type": "library",
+    "require": {
+        "filament/filament": "2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yemenpoint\\FilamentGoogleMapLocationPicker\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yemenpoint",
+            "email": "ebrahim29001@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yemenpoint\\FilamentGoogleMapLocationPicker\\FilamentLocationPickerServiceProvider"
+            ]
+        }
+    }
+}
