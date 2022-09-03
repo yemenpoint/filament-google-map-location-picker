@@ -1,4 +1,5 @@
-# Ranting field for the Filament forms
+# Google map Location Picker
+#### forked from https://packagist.org/packages/sadiq/filament-gmap-location-picker
 
 ## Installation
 
@@ -23,13 +24,16 @@ use Yemenpoint\FilamentGoogleMapLocationPicker\Forms\Components\LocationPicker;
     protected function getFormSchema(): array
     {
         return [
-            ...
                 LocationPicker::make("location")->required(),
-            ...
         ];
     }
 ...
 ```
+
+<div align="center">
+    <img src="https://github.com/yemenpoint/filament-google-map-location-picker/blob/main/images/image1.png" alt="">
+</div>
+<br/>
 
 ####  
 
