@@ -35,11 +35,12 @@ return [
 use Yemenpoint\FilamentGoogleMapLocationPicker\Forms\Components\LocationPicker;
 
 ...
-    protected function getFormSchema(): array
+
+    public static function form(Form $form): Form
     {
-        return [
-                LocationPicker::make("location")->required(),
-        ];
+        return $form->schema([
+              LocationPicker::make("location")->required(),
+        ]);
     }
 ...
 ```
