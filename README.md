@@ -14,6 +14,19 @@ Optionally, you can publish the config using
 ```bash
 php artisan vendor:publish --tag="filament-google-map-location-picker-config"
 ```
+### Config
+```bash
+
+<?php
+
+return [
+    'google_map_key' => "",
+];
+
+
+```
+
+#### replace lat_column_name and lng_column_name with your column names
 
 ## Usage
 
