@@ -15,6 +15,7 @@ Optionally, you can publish the config using
 php artisan vendor:publish --tag="filament-google-map-location-picker-config"
 ```
 ### Config
+#### filament-google-map-location-picker.php
 ```bash
 
 <?php
