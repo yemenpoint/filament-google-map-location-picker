@@ -10,7 +10,7 @@
             init: function () {
                 var defaultLocation = {!! $getDefaultLocation() !!};
 
-                var valueLocation = JSON.parse(this?.value);
+                var valueLocation = this?.value;
 
                 var center = {
                     lat: valueLocation?.lat || defaultLocation.lat,
