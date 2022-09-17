@@ -2,15 +2,15 @@
 
 namespace Yemenpoint\FilamentGoogleMapLocationPicker\Forms\Components;
 
+use Exception;
 use Filament\Forms\Components\Field;
+use JsonException;
 
 class LocationPicker extends Field
 {
-    protected string $view = 'filament-google-map-location-picker::forms.components.location-picker';
+    public int $defaultZoom = 8;
 
-    public $defaultZoom = 8;
-
-    public $controls = [
+    public array $controls = [
         'mapTypeControl' => true,
         'scaleControl' => true,
         'streetViewControl' => true,
@@ -19,14 +19,23 @@ class LocationPicker extends Field
         'searchBoxControl' => false
     ];
 
-    public $defaultLocation = [
-        "lat" => 15.3419776,
-        "lng" => 44.2171392,
+    public array $defaultLocation = [
+        'lat' => 15.3419776,
+        'lng' => 44.2171392,
     ];
+    protected string $view = 'filament-google-map-location-picker::forms.components.location-picker';
 
-    public function getDefaultZoom()
+    public function getDefaultZoom(): int
     {
         return $this->defaultZoom;
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function getDefaultLocation(): string
+    {
+        return json_encode($this->defaultLocation, JSON_THROW_ON_ERROR);
     }
 
     public function setDefaultLocation(array $defaultLocation): static
@@ -36,35 +45,29 @@ class LocationPicker extends Field
         return $this;
     }
 
-    public function getDefaultLocation()
+    public function defaultZoom(int $defaultZoom): static
     {
-        return json_encode($this->defaultLocation);
-    }
-
-    public function defaultZoom($defaultZoom)
-    {
-        $this->configure(function () use ($defaultZoom) {
-            $this->defaultZoom = $defaultZoom;
-        });
+        $this->defaultZoom = $defaultZoom;
 
         return $this;
     }
 
-    public function getMapControls()
+    /**
+     * @throws JsonException
+     */
+    public function getMapControls(): string
     {
-        return json_encode($this->controls);
+        return json_encode($this->controls, JSON_THROW_ON_ERROR);
     }
 
-    public function isSearchBoxControlEnabled()
+    public function isSearchBoxControlEnabled(): bool
     {
         return $this->controls['searchBoxControl'];
     }
 
-    public function mapControls(array $controls)
+    public function mapControls(array $controls): static
     {
-        $this->configure(function () use ($controls) {
-            $this->controls = array_merge($this->controls, $controls);
-        });
+        $this->controls = array_merge($this->controls, $controls);
 
         return $this;
     }
@@ -77,9 +80,8 @@ class LocationPicker extends Field
             return $state;
         } else {
             try {
-                $loc = @json_decode($state, true);
-                return $loc;
-            } catch (\Exception $e) {
+                return @json_decode($state, true, 512, JSON_THROW_ON_ERROR);
+            } catch (Exception $e) {
                 return $loc;
             }
         }
