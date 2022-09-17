@@ -5,18 +5,18 @@
 
 You can install the package via composer:
 
-```bash
+```php
  composer require yemenpoint/filament-google-map-location-picker
 ```
 
 Optionally, you can publish the config using
 
-```bash
+```php
 php artisan vendor:publish --tag="filament-google-map-location-picker-config"
 ```
 ### Config
 #### filament-google-map-location-picker.php
-```bash
+```php
 
 <?php
 

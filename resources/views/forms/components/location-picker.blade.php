@@ -1,5 +1,5 @@
 <script
-    src="https://maps.googleapis.com/maps/api/js?key={{config('filament-google-map-location-picker.google_map_key')}}&libraries=places&v=weekly&language={{app()->getLocale()}}">
+        src="https://maps.googleapis.com/maps/api/js?key={{config('filament-google-map-location-picker.google_map_key')}}&libraries=places&v=weekly&language={{app()->getLocale()}}">
 </script>
 <script>
     function googleMapPicker(config) {
@@ -10,7 +10,7 @@
             init: function () {
                 var defaultLocation = {!! $getDefaultLocation() !!};
 
-                var valueLocation = this?.value;
+                var valueLocation = JSON.parse(this?.value);
 
                 var center = {
                     lat: valueLocation?.lat || defaultLocation.lat,
@@ -25,9 +25,14 @@
                 })
 
                 var marker = new google.maps.Marker({
-                    position: center,
                     map
-                })
+                });
+
+
+                if (valueLocation?.lat && valueLocation?.lng) {
+                    marker.setPosition(valueLocation);
+                }
+
 
                 map.addListener('click', (event) => {
                     this.markerLocation = event.latLng.toJSON();
@@ -56,14 +61,14 @@
 </script>
 
 <x-forms::field-wrapper
-    :id="$getId()"
-    :label="$getLabel()"
-    :label-sr-only="$isLabelHidden()"
-    :helper-text="$getHelperText()"
-    :hint="$getHint()"
-    :hint-icon="$getHintIcon()"
-    :required="$isRequired()"
-    :state-path="$getStatePath()">
+        :id="$getId()"
+        :label="$getLabel()"
+        :label-sr-only="$isLabelHidden()"
+        :helper-text="$getHelperText()"
+        :hint="$getHint()"
+        :hint-icon="$getHintIcon()"
+        :required="$isRequired()"
+        :state-path="$getStatePath()">
 
     <div wire:ignore x-data="googleMapPicker({
             value: $wire.entangle('{{ $getStatePath() }}'),

@@ -8,6 +8,9 @@ use JsonException;
 
 class LocationPicker extends Field
 {
+
+    protected string $view = 'filament-google-map-location-picker::forms.components.location-picker';
+
     public int $defaultZoom = 8;
 
     public array $controls = [
@@ -23,16 +26,12 @@ class LocationPicker extends Field
         'lat' => 15.3419776,
         'lng' => 44.2171392,
     ];
-    protected string $view = 'filament-google-map-location-picker::forms.components.location-picker';
 
     public function getDefaultZoom(): int
     {
         return $this->defaultZoom;
     }
 
-    /**
-     * @throws JsonException
-     */
     public function getDefaultLocation(): string
     {
         return json_encode($this->defaultLocation, JSON_THROW_ON_ERROR);
@@ -82,7 +81,10 @@ class LocationPicker extends Field
             try {
                 return @json_decode($state, true, 512, JSON_THROW_ON_ERROR);
             } catch (Exception $e) {
-                return $loc;
+                return [
+                    'lat' => 0,
+                    'lng' => 0
+                ];
             }
         }
     }
