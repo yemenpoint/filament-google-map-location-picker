@@ -9,8 +9,13 @@
             zoom: config.zoom,
             init: function () {
                 var defaultLocation = {!! $getDefaultLocation() !!};
+                var valueLocation = null;
 
-                var valueLocation = JSON.parse(this?.value);
+                if (this?.value instanceof Object) {
+                    valueLocation = this?.value;
+                } else {
+                    valueLocation = JSON.parse(this?.value);
+                }
 
                 var center = {
                     lat: valueLocation?.lat || defaultLocation.lat,
@@ -22,7 +27,8 @@
                     zoom: this.zoom,
                     zoomControl: false,
                     ...config.controls
-                })
+                });
+
 
                 var marker = new google.maps.Marker({
                     map
