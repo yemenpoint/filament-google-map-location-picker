@@ -79,9 +79,11 @@ use Yemenpoint\FilamentGoogleMapLocationPicker\Forms\Components\LocationPicker;
 ...
     function setLocationAttribute($value)
     {
-    //replace lat_column_name and lng_column_name with your column names
-        $this->attributes['lat_column_name'] = $value["lat"];
-        $this->attributes['lng_column_name'] = $value["lng"];
+        //replace lat_column_name and lng_column_name with your column names
+        $this->attributes['location'] = $value;
+        $_location = @json_decode($value,true);
+        $this->attributes['lat_column_name'] = data_get($_location,"lat");
+        $this->attributes['lng_column_name'] = data_get($_location,"lng");
     }
 
 ...

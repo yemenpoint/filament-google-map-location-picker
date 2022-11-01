@@ -76,15 +76,15 @@ class LocationPicker extends Field
         $state = parent::getState();
 
         if (is_array($state)) {
-            return $state;
+            return json_encode($state);
         } else {
             try {
-                return @json_decode($state, true, 512, JSON_THROW_ON_ERROR);
+                return $state;
             } catch (Exception $e) {
-                return [
+                return json_encode([
                     'lat' => 0,
                     'lng' => 0
-                ];
+                ]);
             }
         }
     }
