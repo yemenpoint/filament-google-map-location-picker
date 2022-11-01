@@ -1,14 +1,16 @@
+<?php $map_id = "map" .  \Illuminate\Support\Str::slug($getStatePath(), "_");  ?>
+
 <script
         src="https://maps.googleapis.com/maps/api/js?key={{config('filament-google-map-location-picker.google_map_key')}}&libraries=places&v=weekly&language={{app()->getLocale()}}">
 </script>
 <script>
-    function googleMapPicker(config) {
+    function {{$map_id}}googleMapPicker(config) {
         return {
             value: config.value,
             markerLocation: {},
             zoom: config.zoom,
-            init: function () {
-                var defaultLocation = {!! $getDefaultLocation() !!};
+            {{$map_id}}init: function () {
+                var locationCenter = {!! $getLocationCenter() !!};
                 var valueLocation = null;
 
                 if (this?.value instanceof Object) {
@@ -18,11 +20,11 @@
                 }
 
                 var center = {
-                    lat: valueLocation?.lat || defaultLocation.lat,
-                    lng: valueLocation?.lng || defaultLocation.lng
+                    lat: valueLocation?.lat || locationCenter.lat,
+                    lng: valueLocation?.lng || locationCenter.lng
                 }
 
-                var map = new google.maps.Map(this.$refs.map, {
+                var map = new google.maps.Map(this.$refs.{{$map_id}}map, {
                     center: center,
                     zoom: this.zoom,
                     zoomControl: false,
@@ -45,7 +47,7 @@
                 });
 
                 if (config.controls.searchBoxControl) {
-                    const input = this.$refs.pacinput;
+                    const input = this.$refs.{{$map_id}}pacinput;
                     const searchBox = new google.maps.places.SearchBox(input);
                     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
                     searchBox.addListener("places_changed", () => {
@@ -76,14 +78,14 @@
         :required="$isRequired()"
         :state-path="$getStatePath()">
 
-    <div wire:ignore x-data="googleMapPicker({
+    <div wire:ignore x-data="{{$map_id}}googleMapPicker({
             value: $wire.entangle('{{ $getStatePath() }}'),
             zoom: {{$getDefaultZoom()}},
             controls: {{$getMapControls()}}
-        })" x-init="init()">
+        })" x-init="{{$map_id}}init()">
         @if($isSearchBoxControlEnabled())
-            <input x-ref="pacinput" type="text" placeholder="Search Box"/>
+            <input x-ref="{{$map_id}}pacinput" type="text" placeholder="Search Box"/>
         @endif
-        <div x-ref="map" class="w-full" style="min-height: 40vh"></div>
+        <div x-ref="{{$map_id}}map" class="w-full" style="min-height: 40vh"></div>
     </div>
 </x-forms::field-wrapper>

@@ -27,9 +27,16 @@ return [
 
 ```
 
-#### replace lat_column_name and lng_column_name with your column names
+## make migration  location column to database
+## add location column to database
 
-## Usage
+```php
+...
+        Schema::table('table_name', function (Blueprint $table) {
+            $table->json("location")->nullable();
+        });
+...
+```
 
 ```php
 use Yemenpoint\FilamentGoogleMapLocationPicker\Forms\Components\LocationPicker;
@@ -43,8 +50,8 @@ use Yemenpoint\FilamentGoogleMapLocationPicker\Forms\Components\LocationPicker;
         ]);
     }
 ...
-```
 
+```
 <div align="center">
     <img src="https://github.com/yemenpoint/filament-google-map-location-picker/blob/main/images/image1.png" alt="">
 </div>
@@ -54,29 +61,22 @@ use Yemenpoint\FilamentGoogleMapLocationPicker\Forms\Components\LocationPicker;
 
 ### Model
 
-#### replace lat_column_name and lng_column_name with your column names
+#### add column name to fillable 
 
 ```php
 ...
 
-
-    protected $appends = [
-        "location"
-    ];
-    
     protected $fillable = [
         "location"
     ];
-    
-    function getLocationAttribute($value)
-    {
-    //replace lat_column_name and lng_column_name with your column names
-        return json_encode([
-            "lat" => (float)$this->lat_column_name,
-            "lng" => (float)$this->lng_column_name,
-        ]);
-    }
+...
+```
 
+
+#### if u have separate column for lat and lng add this Mutator
+
+```php
+...
     function setLocationAttribute($value)
     {
     //replace lat_column_name and lng_column_name with your column names
@@ -86,6 +86,9 @@ use Yemenpoint\FilamentGoogleMapLocationPicker\Forms\Components\LocationPicker;
 
 ...
 ```
+
+
+
 
 ## Credits
 

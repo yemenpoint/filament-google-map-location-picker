@@ -22,7 +22,7 @@ class LocationPicker extends Field
         'searchBoxControl' => false
     ];
 
-    public array $defaultLocation = [
+    public array $locationCenter = [
         'lat' => 15.3419776,
         'lng' => 44.2171392,
     ];
@@ -32,14 +32,14 @@ class LocationPicker extends Field
         return $this->defaultZoom;
     }
 
-    public function getDefaultLocation(): string
+    public function getLocationCenter(): string
     {
-        return json_encode($this->defaultLocation, JSON_THROW_ON_ERROR);
+        return json_encode($this->locationCenter, JSON_THROW_ON_ERROR);
     }
 
-    public function setDefaultLocation(array $defaultLocation): static
+    public function setLocationCenter(array $locationCenter): static
     {
-        $this->defaultLocation = $defaultLocation;
+        $this->locationCenter = $locationCenter;
 
         return $this;
     }
