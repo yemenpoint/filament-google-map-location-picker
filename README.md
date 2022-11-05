@@ -46,13 +46,12 @@ use Yemenpoint\FilamentGoogleMapLocationPicker\Forms\Components\LocationPicker;
     public static function form(Form $form): Form
     {
         return $form->schema([
-              LocationPicker::make("location")->required(),
               LocationPicker::make('location')
-                  ->default(json_encode(["lat" => 15.3419776, "lng" => 44.2171392]))//set default location
+                  ->default(json_encode(["lat" => 15.356893920277, "lng" => 44.173358011179]))//set default location
                   ->defaultZoom(12)// set zoom 
                   ->setLocationCenter([
-                      'lat' => 15.3419776,
-                      'lng' => 44.2171392,
+                      'lat' => 15.356893920277,
+                      'lng' => 44.173358011179,
                   ]) //set location center 
                   ->required()
                   ->columnSpan(2),

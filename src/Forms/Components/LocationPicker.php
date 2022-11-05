@@ -24,8 +24,8 @@ class LocationPicker extends Field
     ];
 
     public array $locationCenter = [
-        'lat' => 15.3419776,
-        'lng' => 44.2171392,
+        'lat' => 15.356893920277,
+        'lng' => 44.173358011179,
     ];
 
     public function getDefaultZoom(): int
