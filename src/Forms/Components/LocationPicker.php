@@ -19,6 +19,7 @@ class LocationPicker extends Field
         'streetViewControl' => true,
         'rotateControl' => true,
         'fullscreenControl' => true,
+        'zoomControl' => true,
         'searchBoxControl' => false
     ];
 

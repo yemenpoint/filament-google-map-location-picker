@@ -1,5 +1,5 @@
 # Google map Location Picker
-#### forked from https://packagist.org/packages/sadiq/filament-gmap-location-picker
+forked from https://packagist.org/packages/sadiq/filament-gmap-location-picker
 
 ## Installation
 
@@ -28,7 +28,7 @@ return [
 ```
 
 ## make migration  location column to database
-## add location column to database
+add location column to database
 
 ```php
 ...
@@ -47,6 +47,15 @@ use Yemenpoint\FilamentGoogleMapLocationPicker\Forms\Components\LocationPicker;
     {
         return $form->schema([
               LocationPicker::make("location")->required(),
+              LocationPicker::make('location')
+                  ->default(json_encode(["lat" => 15.3419776, "lng" => 44.2171392]))//set default location
+                  ->defaultZoom(12)// set zoom 
+                  ->setLocationCenter([
+                      'lat' => 15.3419776,
+                      'lng' => 44.2171392,
+                  ]) //set location center 
+                  ->required()
+                  ->columnSpan(2),
         ]);
     }
 ...
